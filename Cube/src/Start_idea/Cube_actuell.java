@@ -6,16 +6,19 @@ import java.util.Scanner;
 
 public class Cube_actuell {
 
-    public static void main(String[] args){ // Das ist zwar schon relativ weit aber noch ned vollständig, just vor fun würd ich dann aber noch die fertige version beim Abgabegesrpäch herzeigen
+
+    public Cube_actuell(){
         Scanner input = new Scanner(System.in);
         System.out.println("How big should the Canvas be (bigger then a 100 cause you wont see much) and after that the intensiti (bigger then 10 cause it should be a bit fun right?)");
         //int width = input.nextInt();
         //int intensiti = input.nextInt();
         //if(width > 100 && intensiti > 10 )
-        drawACubeV2(500, 10);
-        DrawV3(500, 100);
+        drawACubeV2(500, 10); // ortogonal cube
+        DrawV3(500, 100); // actually 3d cube
         //else System.out.println("What did i just tell you??? try again later");
     }
+
+
 
     public static void drawACubeV2(int width, int intesiti) {
         CodeDraw cd = new CodeDraw(width+width/5, width);

@@ -1,4 +1,6 @@
 import java.util.Scanner;
+
+import Start_idea.Cube_actuell;
 import codedraw.CodeDraw;
 
 public class Main {
@@ -13,20 +15,31 @@ public class Main {
 
     public static void main(String[] args) {
 
-        System.out.printf("Hello and welcome!");
+        System.out.println("Hello what we doin today");
 
         Scanner input = new Scanner(System.in);
 
         int option = input.nextInt();
 
-        if(option == 1){
+        if(option == 1){ // whatever i was working on bevor putting it on ice
+            System.out.println("First option");
             CodeDraw mainPlain = new CodeDraw(width + extra, height + extra);
 
             plain(mainPlain);
 
             mainPlain.show();
-        }else{
+        }else if(option == 2){ // the old main option i did for the creative project
             System.out.println("Second option");
+
+            Cube_actuell actuell = new Cube_actuell();
+
+            int nextInput = input.nextInt();
+
+        }else{ // work option -> what ever im working at the moment
+            System.out.println("Third option");
+
+            int nextInput = input.nextInt();
+
         }
     }
 

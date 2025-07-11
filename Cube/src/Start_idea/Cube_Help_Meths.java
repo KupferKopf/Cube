@@ -11,22 +11,22 @@ public class Cube_Help_Meths {
     public static void main(String[] args){
         Scanner input = new Scanner(System.in);
 
-        //cubes(500,500);
+        //cubes(500,500); //cube everywhere and nowhere at once, quanden cube
 
-        //draw_Square_V1();
+        //draw_Square_V1(); // a square duh
         //draw_Square_V2(500);
 
         //draw_Cube_Pers_V1(500);
         //draw_Cube_Pers_V2(500);
 
-        //stabelising_Cube_V1(650,500);
-        //stabelising_Cube_fast(500,100);
+        //stabelising_Cube_V1(650,200);
+        //stabelising_Cube_fast(500,500);
 
-        drawACubeV2(500, 10);
+        //drawACubeV2(500, 10);
         DrawV3(500, 100);
     }
 
-
+    // creates a new square at a somewhat random location (one random number between 0 and the width and one between 0 and the height)
     public static void cubes(int width, int height) {
 
         CodeDraw cd = new CodeDraw(width, height);
@@ -55,12 +55,12 @@ public class Cube_Help_Meths {
             y = randomY;
             a--;
             cd.show(50);
-            cd.clear();
+            cd.clear(); // with memory or without?
         }
     }
 
 
-
+    // draws a square with the left upper corner being at 150|150 and the bottom right being at 350|350
     public static void draw_Square_V1(){
         CodeDraw cd = new CodeDraw(500, 500);
 
@@ -73,9 +73,9 @@ public class Cube_Help_Meths {
         cd.show();
     }
 
-
+    // draws a square arround the center of the window with a diameter of half the window
     public static void draw_Square_V2(int width){
-        CodeDraw cd = new CodeDraw(width+width/5, width);
+        CodeDraw cd = new CodeDraw(width, width);
 
         int oneCord = width/2 - ((width/10)*2); // the first cord for the square
         int secCord = width/2 + ((width/10)*2); // the second cord for the square in a square canvas
@@ -90,7 +90,7 @@ public class Cube_Help_Meths {
     }
 
 
-
+    // the first try of creating a perspective cube with a bit of a rotation on the y and z axes
     public static void draw_Cube_Pers_V1(int width){
         CodeDraw cd = new CodeDraw(width+width/5, width);
 
@@ -98,15 +98,18 @@ public class Cube_Help_Meths {
         int secCord = width/2 + ((width/10)*2); // the second cord for the square in a square canvas / 500 -> 350
 
         cd.setLineWidth(2);
+        // the main lines on the cube so the main square
         cd.drawLine(oneCord, oneCord, secCord, oneCord + 20);
         cd.drawLine(secCord, oneCord + 20, secCord, secCord + 20);
         cd.drawLine(secCord, secCord + 20, oneCord, secCord);
         cd.drawLine(oneCord, secCord, oneCord, oneCord);
 
+        // top lines of the cube
         cd.drawLine(oneCord + 100, oneCord - 75, secCord + 100, oneCord + 20 - 75); // top back
         cd.drawLine(oneCord, oneCord, oneCord + 100, oneCord - 75); // top left
         cd.drawLine(secCord, oneCord + 20, secCord + 100, oneCord + 20 - 75); // top right
 
+        // side lines on the right of the cube
         cd.drawLine(secCord + 100, oneCord + 20 - 75, secCord + 100, secCord + 20 - 75); // right back
         cd.drawLine(secCord, secCord + 20, secCord + 100, secCord + 20 - 75); // right bottom
 
@@ -114,6 +117,7 @@ public class Cube_Help_Meths {
         cd.clear();
     }
 
+    //second try, quite simulare outcome but not exact
     public static void draw_Cube_Pers_V2(int width){
 
         CodeDraw cd = new CodeDraw(width+width/5, width);
@@ -144,7 +148,9 @@ public class Cube_Help_Meths {
     }
 
 
-
+    // having a drawn cube with all the correct points for it to look like perspecitve cube V1/V2 but adding a random value to the end of the lines
+    // with that the cube seems to be a total mess in the beginning but starts to stabaliese a bit each round, like an AI learning
+    // each round the random value is reduced by 1 or it can be changed depending on the speed it should finish
     public static void stabelising_Cube_V1(int width, int intesiti){
         CodeDraw cd = new CodeDraw(width+width/5, width);
 
@@ -214,7 +220,9 @@ public class Cube_Help_Meths {
 
 
 
-
+    // stabelising cube but with accelerated speed so it
+    // 1. doesnt take so long
+    // 2. looks cooler cause fast and big to slow and precise looks good
     public static void stabelising_Cube_fast(int width, int intesiti){
         CodeDraw cd = new CodeDraw(width+width/5, width);
 
@@ -232,38 +240,12 @@ public class Cube_Help_Meths {
 
         int[] cords = new int[36];
 
-        int rounds = 1;
-        int sum = 0;
-        int tempi = 0;
-        while ( sum < intesiti){
-            sum += rounds;
-            rounds ++;
-        }
 
-
-
-        for (int k = rounds; 0 < amplifier; k--) {
-
-            if(k == 0){
-
-            }
+        for (int k = 0; 0 < amplifier; k++) {
 
             //alle random nummern gennerieren
-            if(amplifier - k > 0){
-                amplifier -= k; // reduziert den amp damit es ned mehr so wobbelt
-                startO += k; // erhoht den start0 dammit er näher am richtigen punkt ist reduziert auch das wobbeln
-                if(k%2==0)startS -= k; // verringert den startS dammit er näher am richtigen punkt ist reduziert auch das wobbeln
-
-                //alle random nummern gennerieren
-                for (int i = 0; i < cords.length; i++) {
-                    cords[i] = randy.nextInt(0, amplifier);
-                }
-
-            } else {
-                amplifier = 0; // reduziert den amp damit es ned mehr so wobbelt
-                startO = oneCord; // erhoht den start0 dammit er näher am richtigen punkt ist reduziert auch das wobbeln
-                startS = secCord; // verringert den startS dammit er näher am richtigen punkt ist reduziert auch das wobbeln
-                Arrays.fill(cords, 0);
+            for (int i = 0; i < cords.length; i++) {
+                cords[i] = randy.nextInt(0, amplifier);
             }
 
             cd.setLineWidth(2);
@@ -280,7 +262,14 @@ public class Cube_Help_Meths {
             cd.drawLine(startS + cords[32], startS + cubeOffset + cords[33], startS + cubeDistanc + cords[34], startS + cubeOffset - cubeVerschiebung + cords[35]); // right bottom
 
 
-            cd.show(100 + (k * 10));
+            int tenth = (int)Math.ceil(amplifier/10.0);
+
+            // amp reduzieren
+            amplifier -= tenth; // reduziert den amp damit es ned mehr so wobbelt
+            startO += tenth; // erhoht den start0 dammit er näher am richtigen punkt ist reduziert auch das wobbeln
+            if(k%2==0)startS -= tenth; // verringert den startS dammit er näher am richtigen punkt ist reduziert auch das wobbeln
+
+            cd.show(100);
             cd.clear();
             System.out.println("round " + k);
         }
@@ -307,6 +296,7 @@ public class Cube_Help_Meths {
     }
 
 
+    // a bit out of place cube, but ey its a cube so its great anyways :))
     public static void drawACubeV2(int width, int intesiti) {
         CodeDraw cd = new CodeDraw(width+width/5, width);
 
@@ -336,6 +326,8 @@ public class Cube_Help_Meths {
 
     }
 
+
+    // not sure whats so different from this to the V2 or the other perspecitve ones but yeah cube V3 i guess :)
     public static void DrawV3(int width, int intesiti){
         CodeDraw cd = new CodeDraw(width+width/5, width);
 
