@@ -1,0 +1,57 @@
+package Version_1;
+
+/**
+ *  So first up I will need a world in which i can portrait everything duh
+ *  in that world to properly display everything i will need a start-point, a point of origin, a viewpoint, A Camera
+ *  so thats the first thing i will have to make -> Kamera
+ *  then to test if the camera works i will need something to display, for that i will have the differen typse of Objects -> Koerper
+ *  on one hand something simple but works to test most things, a line from one point to another
+ *  on the other something more advanced to actually do what i wanted to, a cube with alle 8 corners and 6 sides working on displaying what when
+ **/
+
+public class World {
+
+
+    //Kamera
+    private Kamera kamera;
+
+    // Ein Körper
+    private Koerper koerper;
+
+
+    public World(){
+        // TODO use usefull values as a default setting for a world
+        // this.kamera =;
+        // this.koerper =;
+    }
+
+    /**
+     * A Constructor using the given value to create a new World using that kamera and that koerper
+     *
+     * @param kamera, the given kamera with predetermend settings for the world              | must not be null |
+     * @param koerper, the given koerper that will be portrait in this world and its details | must not be null |
+     */
+    public World(Kamera kamera, Koerper koerper) {
+        this.kamera = kamera;
+        this.koerper = koerper;
+    }
+
+
+
+
+
+
+
+
+/**
+ * Returns {@code true} if {@code obj} is also of class {@code Stick}, has an equal stick
+ * weight, and has equal mobiles attached, regardless of their order. This means that 'this'
+ * and {@code obj} have the same number of mobiles attached and every mobile attached to this
+ * stick is equal to a mobile attached to {@code obj} (and vice versa).
+ * Otherwise, {@code false} is returned.
+ *
+ * @param obj the other object to compare with.
+ * @return {@code true} if {@code this} and {@code obj} are equal and {@code false} otherwise.
+**/
+
+}

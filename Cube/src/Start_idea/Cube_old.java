@@ -2,29 +2,36 @@ package Start_idea;
 
 import codedraw.*;
 
-import java.util.Arrays;
+import java.sql.SQLOutput;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Cube_Help_Meths {
+public class Cube_old {
 
-    public static void main(String[] args){
+    public Cube_old() {
         Scanner input = new Scanner(System.in);
 
-        //cubes(500,500); //cube everywhere and nowhere at once, quanden cube
+        System.out.println("| 1: squares | 2: cubes | 3: epileptic square | 4: epileptic cube |");
 
-        //draw_Square_V1(); // a square duh
-        //draw_Square_V2(500);
+        int opt = input.nextInt();
 
-        //draw_Cube_Pers_V1(500);
-        //draw_Cube_Pers_V2(500);
-
-        //stabelising_Cube_V1(650,200);
-        //stabelising_Cube_fast(500,500);
-
-        //drawACubeV2(500, 10);
-        DrawV3(500, 100);
+        if (opt == 1) { // squares
+            draw_Square_V1();
+            draw_Square_V2(500);
+        } else if (opt == 2) { // cubes
+            drawACubeV2(500, 10);
+            draw_Cube_Pers_V1(500);
+            draw_Cube_Pers_V2(500);
+            DrawV3(500, 100);
+        } else if (opt == 3) { // epileptic square
+            cubes(500, 500);
+        } else if (opt == 4) { // epileptic cube
+            stabelising_Cube_V1(650, 200);
+            stabelising_Cube_fast(500, 500);
+        } else
+            System.out.println("nix");
     }
+
 
     // creates a new square at a somewhat random location (one random number between 0 and the width and one between 0 and the height)
     public static void cubes(int width, int height) {
@@ -217,7 +224,6 @@ public class Cube_Help_Meths {
         }
 
     }
-
 
 
     // stabelising cube but with accelerated speed so it
