@@ -19,6 +19,10 @@ public class World {
     private Koerper koerper;
 
 
+    /**
+     * The default constructor, if you don't know or want to give a certain kamera and koerper
+     * not sure what i should make the default for now
+     */
     public World(){
         // TODO use usefull values as a default setting for a world
         // this.kamera =;
@@ -37,12 +41,6 @@ public class World {
     }
 
 
-
-
-
-
-
-
 /**
  * Returns {@code true} if {@code obj} is also of class {@code Stick}, has an equal stick
  * weight, and has equal mobiles attached, regardless of their order. This means that 'this'
@@ -53,5 +51,15 @@ public class World {
  * @param obj the other object to compare with.
  * @return {@code true} if {@code this} and {@code obj} are equal and {@code false} otherwise.
 **/
+
+
+    /**
+     * the toString methode returns a String containing the most relevant details about this world
+     * calls The toString of the Kamera and the Koerper
+     * @return a String containing all the details about this World in two lines
+     */
+    public String toString(){
+        return "Kamera: " + kamera.toString() + " \n Koerper: " + koerper.toString();
+    }
 
 }
