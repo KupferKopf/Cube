@@ -20,9 +20,9 @@ public class Coordinates {
      * the default constructor for cords if there is no need for special values just a quick new point in the world
      */
     public Coordinates(){
-        x = 1;
-        y = 1;
-        z = 1;
+        x = 0;
+        y = 0;
+        z = 0;
     }
 
     /**
@@ -131,6 +131,21 @@ public class Coordinates {
             throw new NullPointerException("The given array was null");
         }
     }
+
+
+    public int calcAngels(Coordinates cord){
+
+
+        return 0;
+    }
+
+
+
+    public int calcVektor(Coordinates cord){
+
+        return 0;
+    }
+
 
 
     /**
