@@ -138,13 +138,34 @@ public class Vector {
 
 
     // first calc all the possible connections between those test cords and calc the rates and find out how to put negativ numbers into this game without fucking up
+    // either taking the biggest value of the 3 and give the rate working with that
+    // or taking the wanted axes
+    // not sure what will work better or might be more usefull but im just gona make both cant hurt and worst-case one wont be used
     public int[] calcRates(String axes){
+
+        String comp = axes.toLowerCase();
+
+        if(comp.equals("x")) return calcXRate();
+        else if(comp.equals("y")) return calcYRate();
+        else if(comp.equals("z")) return calcZRate();
+        else return new int[] {0, 0, 0};
+    }
+
+    public int[] calcXRate(){
+
 
 
 
         return new int[] {0, 0, 0};
     }
 
+    public int[] calcYRate(){
+        return new int[] {0, 0, 0};
+    }
+
+    public int[] calcZRate(){
+        return new int[] {0, 0, 0};
+    }
 
     /**
      * checks if a vector is totally identical

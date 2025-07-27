@@ -17,7 +17,7 @@ public class Main {
         System.out.println("Hello what we doin today");
         System.out.println("We got 1: whatever im working on right now in active or inactive development");
         System.out.println("We got 2: all the old mehtods from the old Cube class, were you get more to chose from");
-        System.out.println("We got 3: who knows whats there havn't found a use yet");
+        System.out.println("We got 3: the test-menu");
         Scanner input = new Scanner(System.in);
 
         int option = input.nextInt();
@@ -35,8 +35,8 @@ public class Main {
             int nextInput = input.nextInt();
 
         }else{ // well who know whats gona end up here
-            System.out.println("| Third option | man i dont even know");
-
+            System.out.println("| Third option | The tests-Menu, select what you wana test");
+            // TODO
             int nextInput = input.nextInt();
 
         }
