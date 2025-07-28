@@ -41,17 +41,6 @@ public class World {
     }
 
 
-/**
- * Returns {@code true} if {@code obj} is also of class {@code Stick}, has an equal stick
- * weight, and has equal mobiles attached, regardless of their order. This means that 'this'
- * and {@code obj} have the same number of mobiles attached and every mobile attached to this
- * stick is equal to a mobile attached to {@code obj} (and vice versa).
- * Otherwise, {@code false} is returned.
- *
- * @param obj the other object to compare with.
- * @return {@code true} if {@code this} and {@code obj} are equal and {@code false} otherwise.
-**/
-
 
     /**
      * the toString methode returns a String containing the most relevant details about this world
