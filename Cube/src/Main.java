@@ -6,6 +6,11 @@ import java.util.Scanner;
 
 public class Main {
 
+    ///TODO overall
+    /// start with the visula stuff
+    /// get the a bit more info text in the methodes so its easier when debugging
+    /// write a couple more tests and go back adding helpfull souts3
+
 
     public static void main(String[] args) {
 

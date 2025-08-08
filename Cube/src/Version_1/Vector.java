@@ -1,6 +1,10 @@
 package Version_1;
 
 
+import codedraw.CodeDraw;
+
+import java.sql.SQLOutput;
+
 /**
  * a class used in combination with @Class Coordinates to describe the different objects in the world
  * using 3 values, same as coordinates but those arnt the location, that's covered by a coordinate itself
@@ -14,6 +18,11 @@ public class Vector {
     private int xDirection;
     private int yDirection;
     private int zDirection;
+
+
+
+    /// ___________________________ CONSTRUCTS _________________________________________
+
 
     /**
      * The plain default constructor giving the startPoint the 0|0|0 cords
@@ -69,6 +78,9 @@ public class Vector {
         zDirection = zDir;
     }
 
+
+    /// _____________________ GETTERS AND SETTERS _____________________________
+
     /**
      * Getter for startPoint
      * @return the Startpoint a Coordinate
@@ -91,7 +103,8 @@ public class Vector {
         }
     }
 
-    // GETTERS AND SETTERS START
+
+
     /**
      * the getters and setters for the Directions
      * @return the wanted direction factor of the Vactor, and all of them at once if needed
@@ -123,49 +136,186 @@ public class Vector {
     public int[] getAllDirection(){
         return new int[] {xDirection, yDirection, zDirection};
     }
-    // GETTERS AND SETTERS END
+
+
+
+
+    /// ____________________________________ CALCS __________________________________________
 
 
     // einmal auf der x,y ebene
     // und einaml auf der x,z ebene
     // die rotation berechnen
-    public int[] calcAngles(){
+    public double[] calcAngles(){
 
-
-
-        return new int[] {0, 0};
+        System.out.println("| Vector | calcAngles | INFO | starting the method");
+        return new double[] {calcAngle(xDirection, yDirection), calcAngle(xDirection, zDirection)};
     }
+
+    public double calcAngle(int x, int y){
+
+        System.out.println("| Vector | calcAngle | INFO | starting the method");
+
+        if(x != 0 ) { // we got increase on x
+            if(y != 0) { // we got increase on y
+
+                // actual values that need to be calced
+                System.out.println("| Vector | calcAngle | INFO | calcing degrees");
+                double angleRad = Math.atan2(y, x);
+                return Math.toDegrees(angleRad);
+
+            }else{
+
+                if(x > 0){ // normal straight right
+                    System.out.println("| Vector | calcAngle | VALUE-INFO | First is positive (>0) and second is 0 --> 0°");
+                    return 0.0;
+                }else{ // straight left
+                    System.out.println("| Vector | calcAngle | VALUE-INFO | First is negative (<0) and second is 0 --> 180°");
+                    return 180.0;
+                }
+            }
+
+        } else if (y != 0) { // rest to just check fast and catch the 0s
+
+            if(y > 0){ // y is positive so top site and no x straight up
+                System.out.println("| Vector | calcAngle | VALUE-INFO | Second is positive (>0) and First is 0 --> 90°");
+                return 90.0;
+            }else{ // y is negative and straight down
+                System.out.println("| Vector | calcAngle | VALUE-INFO | Second is positive (<0) and First is 0 --> 270°");
+                return 270.0;
+            }
+
+        }
+
+        System.out.println("| Vector | calcAngle | INFO | Both values are 0 so no angle possible");;
+        return 0;
+    }
+
+
 
 
     // first calc all the possible connections between those test cords and calc the rates and find out how to put negativ numbers into this game without fucking up
     // either taking the biggest value of the 3 and give the rate working with that
     // or taking the wanted axes
     // not sure what will work better or might be more usefull but im just gona make both cant hurt and worst-case one wont be used
-    public int[] calcRates(String axes){
+    public double[] calcRates(String axes){
 
         String comp = axes.toLowerCase();
 
-        if(comp.equals("x")) return calcXRate();
-        else if(comp.equals("y")) return calcYRate();
-        else if(comp.equals("z")) return calcZRate();
-        else return new int[] {0, 0, 0};
+        return switch (comp) {
+            case "x" -> calcXRate();
+            case "y" -> calcYRate();
+            case "z" -> calcZRate();
+            default -> new double[]{0, 0, 0};
+        };
     }
 
-    public int[] calcXRate(){
+    public double[] calcXRate(){
+
+        System.out.println("| Vector | calcXRate | INFO | Starting Methode");
 
 
+        if(xDirection != 0){ // if x is 0 or not, dividing by 0 wouldn't be that nice
+            double yDx = (double) yDirection/xDirection; // y divided by x
+            double zDx = (double) zDirection /xDirection; // z divided by x
 
+            System.out.println("| Vector | calcXRate | VALUE-INFO | Rates calculated successfully | Y/X: " + yDx + " | Z/X: " + zDx + " |");
 
-        return new int[] {0, 0, 0};
+            return new double[]{1,yDx, zDx};
+
+        }else if(yDirection != 0){ // if y is 0 or not and calcing the rate after it as x is irrelevant
+            System.out.println("| Vector | calcXRate | VALUE-INFO | X is 0 so orientating after Y and calling calcYRate()");
+            return calcYRate();
+
+        }else if (zDirection != 0) { // if so we only got z left
+            System.out.println("| Vector | calcXRate | VALUE-INFO | X and Y direction are 0 so the rate is only Z: " + zDirection);
+            return new double[]{0, 0, zDirection};
+        }
+
+        System.out.println("| Vector | calcXRate | VALUE-INFO | All directions are 0 so the rates are all 0");
+        return new double[] {0, 0, 0};
     }
 
-    public int[] calcYRate(){
-        return new int[] {0, 0, 0};
+
+    public double[] calcYRate(){
+
+        System.out.println("| Vector | calcYRate | INFO | Starting Methode");
+
+
+        if(yDirection != 0){ // if y is 0 or not cause div by 0 no bueno
+
+            double xDy = (double) xDirection/yDirection; // x divided by y
+            double zDy = (double) zDirection/yDirection; // z divided by y
+
+            System.out.println("| Vector | calcYRate | VALUE-INFO | Rates calculated successfully | X/Y: " + xDy + " | Z/Y: " + zDy + " |");
+
+            return new double[]{xDy, 1, zDy};
+
+        }else if (zDirection != 0){
+            System.out.println("| Vector | calcYRate | VALUE-INFO | Y is 0 so orientating after Z and calling calcZRate()");
+            return calcZRate();
+
+        }else if (xDirection != 0){ // all are 0 so we back with
+            System.out.println("| Vector | calcXRate | VALUE-INFO | Y and Z direction are 0 so the rate is only X: " + xDirection);
+            return new double[]{xDirection,0,0};
+        }
+
+        System.out.println("| Vector | calcYRate | VALUE-INFO | All directions are 0 so the rates are all 0");
+        return new double[] {0, 0, 0};
     }
 
-    public int[] calcZRate(){
-        return new int[] {0, 0, 0};
+    public double[] calcZRate(){
+
+        System.out.println("| Vector | calcZRate | INFO | Starting Methode");
+
+        if(zDirection != 0){ // check if z is 0 cause div by 0 ain't fun
+
+            double xDz = (double) xDirection/zDirection; // x divided by z
+            double yDz = (double) yDirection/zDirection; // y divided by z
+
+            System.out.println("| Vector | calcZRate | VALUE-INFO | Rates calculated successfully | X/Z: " + xDz + " | Y/Z: " + yDz + " |");
+
+            return new double[]{xDz, yDz, 1};
+
+        }else if (xDirection != 0){ // check if x is an alternative
+            System.out.println("| Vector | calcZRate | VALUE-INFO | Z is 0 so orientating after X and calling calcXRate()");
+            return calcXRate();
+
+        }else if (yDirection != 0){ // is even y = 0 or not
+            System.out.println("| Vector | calcZRate | VALUE-INFO | X and Z direction are 0 so the rate is only Y: " + yDirection);
+            return new double[]{0,yDirection,0};
+        }
+
+
+        System.out.println("| Vector | calcZRate | VALUE-INFO | All directions are 0 so the rates are all 0");
+        return new double[] {0, 0, 0};
     }
+
+
+    /// _________________________________________VISUAL_____________________________________________
+
+
+    public void visualize2D(CodeDraw cdXY, CodeDraw cdXZ){
+        // TODO write code draw function
+
+        double[] rates = calcXRate();
+
+
+    }
+
+
+    public void visualize3D(CodeDraw cd){
+        // TODO write code draw function
+    }
+
+
+    public void drawVector(CodeDraw cd, Kamera kam){
+        // TODO write drawVector but think about if the vector is visible
+    }
+
+
+    ///_______________________________________________STATS__________________________________
+
 
     /**
      * checks if a vector is totally identical
@@ -204,5 +354,18 @@ public class Vector {
     public String toString(){
         return startPoint.toString() + " --> | " + xDirection + " | " + yDirection + " | " + zDirection + " |";
     }
+
+
+    public String toStringDetailed(){
+        String ret = "";
+        double[] rates = calcXRate();
+
+        ret += "Start: "  + startPoint.toString() + "\n";
+        ret += "Direction: | " + xDirection + " | " + yDirection + " | " + zDirection + " |\n";
+        ret += "Rates: | x " + rates[0] + " | y " + rates[1] + " | z " + rates[2] + " | ";
+
+        return ret;
+    }
+
 
 }

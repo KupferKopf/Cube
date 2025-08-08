@@ -36,6 +36,9 @@ public class Main_Test {
             }else{
                 System.out.println("| Main_Test | runTests | VALUE-ERROR | We dont have this value on the list, cant test what we dont know");
             }
+
+            // TODO
+            //  possible break point asking "wana continue or not"
         }
     }
 
