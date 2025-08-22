@@ -139,9 +139,9 @@ public class Vector {
 
 
 
-
     /// ____________________________________ CALCS __________________________________________
 
+    //TODO descriptions needed
 
     // einmal auf der x,y ebene
     // und einaml auf der x,z ebene
@@ -192,8 +192,6 @@ public class Vector {
     }
 
 
-
-
     // first calc all the possible connections between those test cords and calc the rates and find out how to put negativ numbers into this game without fucking up
     // either taking the biggest value of the 3 and give the rate working with that
     // or taking the wanted axes
@@ -235,7 +233,6 @@ public class Vector {
         System.out.println("| Vector | calcXRate | VALUE-INFO | All directions are 0 so the rates are all 0");
         return new double[] {0, 0, 0};
     }
-
 
     public double[] calcYRate(){
 
@@ -292,13 +289,28 @@ public class Vector {
     }
 
 
+
     /// _________________________________________VISUAL_____________________________________________
 
+    //TODO descriptions needed
 
     public void visualize2D(CodeDraw cdXY, CodeDraw cdXZ){
         // TODO write code draw function
 
+        System.out.println("| Vector | visualize2D | INFO | starting the Methode");
+
+        if(cdXY == null){
+            System.out.println("| Vector | visualize2D | VALUE-ERROR | cdXY (XY drawing Window) is null/not given, XY vector can't/won't be drawn");
+        }
+        if(cdXZ == null){
+            System.out.println("| Vector | visualize2D | VALUE-ERROR | cdXZ (XZ drawing Window) is null/not given, XZ vector can't/won't be drawn");
+        }
         double[] rates = calcXRate();
+
+        // drawing the layout for the vectors
+
+        cdXY.drawBezier();
+
 
 
     }
@@ -351,21 +363,22 @@ public class Vector {
      * The toString of a Vector returning all the details in a nice single string/ one line
      * @return the toString from the start-Coordinate as well as the directional vector with its values
      */
+   @Override
     public String toString(){
         return startPoint.toString() + " --> | " + xDirection + " | " + yDirection + " | " + zDirection + " |";
     }
 
-
+    /// TODO description needed
     public String toStringDetailed(){
         String ret = "";
         double[] rates = calcXRate();
-
+        double[] angles = calcAngles();
         ret += "Start: "  + startPoint.toString() + "\n";
         ret += "Direction: | " + xDirection + " | " + yDirection + " | " + zDirection + " |\n";
-        ret += "Rates: | x " + rates[0] + " | y " + rates[1] + " | z " + rates[2] + " | ";
+        ret += "Rates:     | x " + rates[0] + " | y " + rates[1] + " | z " + rates[2] + " |\n";
+        ret += "Angles:    | X/Y: " + angles[0] + " | X/Z: " + angles[1] + " |";
 
         return ret;
     }
-
 
 }
