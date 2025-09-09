@@ -101,10 +101,16 @@ public class Vector_Tests {
         System.out.println();
         System.out.println("| Vector_Tests | Constructor | 4.TEST | VISUALISE");
         System.out.println("| 2D Visualizing | one window for the xy rate, one window for the xz rate");
-        CodeDraw cdXY = new CodeDraw(700,500);
+        CodeDraw cdNorm = new CodeDraw(700,500);
+        CodeDraw cdNegX = new CodeDraw(700,500);
+        CodeDraw cdNegY = new CodeDraw(700,500);
         //CodeDraw cdXZ = new CodeDraw(700,500);
         Vector vNorm = new Vector(cordNorm, 5,6,7);
-        vNorm.visualize2D(cdXY, null);
+        vNegX = new Vector(cordNorm,-4,5,1);
+        Vector vNegY = new Vector(cordNorm, 4, -5, 1);
+        vNorm.visualize2D(cdNorm, "Y");
+        vNegX.visualize2D(cdNegX, "Y");
+        vNegY.visualize2D(cdNegY ,"Y");
 
 
         System.out.println();

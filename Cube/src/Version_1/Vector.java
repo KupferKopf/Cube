@@ -3,8 +3,6 @@ package Version_1;
 
 import codedraw.CodeDraw;
 
-import java.sql.SQLOutput;
-
 /**
  * a class used in combination with @Class Coordinates to describe the different objects in the world
  * using 3 values, same as coordinates but those arnt the location, that's covered by a coordinate itself
@@ -294,26 +292,65 @@ public class Vector {
 
     //TODO descriptions needed
 
-    public void visualize2D(CodeDraw cdXY, CodeDraw cdXZ){
-        // TODO write code draw function
+    public void visualize2D(CodeDraw cd, String axes){
 
         System.out.println("| Vector | visualize2D | INFO | starting the Methode");
 
-        if(cdXY == null){
-            System.out.println("| Vector | visualize2D | VALUE-ERROR | cdXY (XY drawing Window) is null/not given, XY vector can't/won't be drawn");
+        if(cd == null){
+            System.out.println("| Vector | visualize2D | VALUE-ERROR | cd is null/not given, X" + axes + " vector can't/won't be drawn");
+        }else{
+            drawSetup2D(cd, axes);
+
+            double[] rates = calcXRate(); // rates need to be true to the direction of the vector not just the values + & - need to stay correct
+
+            if(xDirection == 0){ // if x is 0 the vector is drawn as a straight line upwards
+                System.out.println("| Vector | visualize2D | VALUE-INFO | The xDirection is 0 so will be portrait as a line");
+                cd.drawLine(250, 50, 250, 450);
+            }
+            // if the other axes is 0 the vetor will be drawn as a horizontal line
+            if((yDirection == 0 && axes.equalsIgnoreCase("y")) || (zDirection == 0 && axes.equalsIgnoreCase("z"))){
+                System.out.println("| Vector | visualize2D | VALUE-INFO | The " + axes.toLowerCase() + "Direction is 0 so will be portrait as a line");
+                cd.drawLine(50, 250, 450, 250);
+            }
+
+
+            // draw stats
+            cd.drawText(570, 80, "" + rates[0]);
+            if(axes.equalsIgnoreCase("y")){
+                cd.drawText(570,110, "" + rates[1]);
+            }else{
+                cd.drawText(570, 110, "" + rates[2]);
+            }
+            cd.show();
+
         }
-        if(cdXZ == null){
-            System.out.println("| Vector | visualize2D | VALUE-ERROR | cdXZ (XZ drawing Window) is null/not given, XZ vector can't/won't be drawn");
-        }
-        double[] rates = calcXRate();
-
-        // drawing the layout for the vectors
-
-        cdXY.drawBezier();
-
-
-
     }
+
+    private void drawSetup2D(CodeDraw cd, String axes){
+
+        // stats screen:
+        cd.drawText(580,50, "Stats");
+        cd.drawText(560, 80, "X:");
+        cd.drawText(560, 110, axes + ":");
+        cd.drawText(530, 140, "rate:");
+
+        cd.setLineWidth(2);
+        cd.drawRectangle(500,1,198, 498);
+        cd.setLineWidth(1);
+
+        // _||_
+        // ¯||¯
+
+        // border lines
+        cd.drawLine(50,50, 50, 450);
+        cd.drawLine(50,450, 450, 450);
+
+        // letters and nums
+        cd.drawText(30,30,axes);
+        cd.drawText(35,460, "0");
+        cd.drawText(460,460, "X");
+    }
+
 
 
     public void visualize3D(CodeDraw cd){
