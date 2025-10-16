@@ -302,24 +302,68 @@ public class Vector {
             drawSetup2D(cd, axes);
 
             double[] rates = calcXRate(); // rates need to be true to the direction of the vector not just the values + & - need to stay correct
+            double curRate = 0;
+            if(axes.equalsIgnoreCase("y")) curRate = rates[1];
+            else if(axes.equalsIgnoreCase("z")) curRate = rates[2];
 
-            if(xDirection == 0){ // if x is 0 the vector is drawn as a straight line upwards
+
+
+            // if x is 0 the vector is drawn as a straight line upwards
+            if(xDirection == 0){
                 System.out.println("| Vector | visualize2D | VALUE-INFO | The xDirection is 0 so will be portrait as a line");
                 cd.drawLine(250, 50, 250, 450);
+                cd.drawText(250, 455, "" + curRate);
             }
+
             // if the other axes is 0 the vetor will be drawn as a horizontal line
             if((yDirection == 0 && axes.equalsIgnoreCase("y")) || (zDirection == 0 && axes.equalsIgnoreCase("z"))){
                 System.out.println("| Vector | visualize2D | VALUE-INFO | The " + axes.toLowerCase() + "Direction is 0 so will be portrait as a line");
                 cd.drawLine(50, 250, 450, 250);
+                cd.drawText(455, 250, "" + rates[0]);
             }
+
+            int[] startP = {50,50};
+            int[] endP;
+
+            /// drawing rate-line
+            /// 400 is the length of the sides of the graph containing the vector drawing
+            /// in order to properly represent the vector the rate needs to be visually matched
+            /// its done by multing the length by the rate and depending on if the vector goes against the top/bottom side or the side
+            if(curRate < 0 ){ // if curRate is <0 it needs to start top left
+
+                if(curRate < -1){ // if the curRate is steeper then -1 it goes against the bottom
+                    endP = new int[]{(int) (50 + (400/curRate)*-1), 450};
+                }else{  // if -1 < curRate < 0 it goes against the right wall
+                    endP = new int[]{450, (int) (50 + (400*curRate)*-1)};
+                }
+
+                cd.drawLine(startP[0], startP[1], endP[0], endP[1]);
+
+            } else { // if > 0 the line starts from bottem left
+                startP = new int[]{50, 450};
+
+                if(curRate > 1) { // faster increase then x so it goes against the top
+                    endP = new int[]{(int) (50 + (400 / curRate)), 50};
+                }else{ // slower increase then x so it goes against the side
+                    endP = new int[]{450, (int) (50 + (400 * curRate))};
+                }
+            }
+
+            cd.setLineWidth(2);
+            System.out.println("| Vector | visualize2D | INFO | Rate-Line is been drawn with start-X/Y: " + startP[0] + "/" + startP[1] + " and end-X/Y: " + endP[0] + "/" + endP[1]);
+            cd.drawLine(startP[0], startP[1], endP[0], endP[1]);
+            cd.setLineWidth(1);
+
 
 
             // draw stats
-            cd.drawText(570, 80, "" + rates[0]);
+            cd.drawText(580, 80, "" + xDirection);
             if(axes.equalsIgnoreCase("y")){
-                cd.drawText(570,110, "" + rates[1]);
+                cd.drawText(580,110, "" + yDirection);
+                cd.drawText(580,140, "" + rates[1]);
             }else{
-                cd.drawText(570, 110, "" + rates[2]);
+                cd.drawText(580, 110, "" + xDirection);
+                cd.drawText(580,140, "" + rates[2]);
             }
             cd.show();
 
@@ -328,24 +372,36 @@ public class Vector {
 
     private void drawSetup2D(CodeDraw cd, String axes){
 
-        // stats screen:
+        /// stats screen:
         cd.drawText(580,50, "Stats");
         cd.drawText(560, 80, "X:");
         cd.drawText(560, 110, axes + ":");
-        cd.drawText(530, 140, "rate:");
+        cd.drawText(543, 140, "rate:");
 
         cd.setLineWidth(2);
-        cd.drawRectangle(500,1,198, 498);
+        cd.drawRectangle(500,1,199, 499);
         cd.setLineWidth(1);
 
         // _||_
         // ¯||¯
 
-        // border lines
+        /// borderlines
         cd.drawLine(50,50, 50, 450);
         cd.drawLine(50,450, 450, 450);
 
-        // letters and nums
+        /// rates on the sides Y then X
+        cd.drawLine(45,130,50,130);
+        cd.drawLine(45,210,50,210);
+        cd.drawLine(45,290,50,290);
+        cd.drawLine(45,370,50,370);
+
+        cd.drawLine(130, 450, 130, 455);
+        cd.drawLine(210, 450, 210, 455);
+        cd.drawLine(290, 450, 290, 455);
+        cd.drawLine(370, 450, 370, 455);
+
+
+        /// letters and nums
         cd.drawText(30,30,axes);
         cd.drawText(35,460, "0");
         cd.drawText(460,460, "X");
@@ -404,6 +460,7 @@ public class Vector {
     public String toString(){
         return startPoint.toString() + " --> | " + xDirection + " | " + yDirection + " | " + zDirection + " |";
     }
+
 
     /// TODO description needed
     public String toStringDetailed(){
