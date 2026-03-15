@@ -1,7 +1,7 @@
 package Tests;
 
-import Version_1.Coordinates;
-import Version_1.Vector;
+import Version_1.Coordinates_old;
+import Version_1.Vector_old;
 import codedraw.CodeDraw;
 
 public class Vector_Tests {
@@ -17,15 +17,15 @@ public class Vector_Tests {
         //  write all test methods here :)
 
         //creating test Cords
-        Coordinates cordDefault = new Coordinates(0,0,0); // Default
-        Coordinates cordNorm = new Coordinates(4,3,2);    // normal
-        Coordinates cordNx = new Coordinates(-5,1,2);     // negative x
-        Coordinates cordNy = new Coordinates(2,-5,3);     // negative y
-        Coordinates cordNz = new Coordinates(2,1,-1);     // negative z
-        Coordinates cordNxy = new Coordinates(-6,-4,5);   // negative xy
-        Coordinates cordNxz = new Coordinates(-4,3,-3);   // negative xz
-        Coordinates cordNyz = new Coordinates(3,-3,-2);   // negative yz
-        Coordinates cordNxyz = new Coordinates(-4,-4,-3); // negative xyz
+        Coordinates_old cordDefault = new Coordinates_old(0,0,0); // Default
+        Coordinates_old cordNorm = new Coordinates_old(4,3,2);    // normal
+        Coordinates_old cordNx = new Coordinates_old(-5,1,2);     // negative x
+        Coordinates_old cordNy = new Coordinates_old(2,-5,3);     // negative y
+        Coordinates_old cordNz = new Coordinates_old(2,1,-1);     // negative z
+        Coordinates_old cordNxy = new Coordinates_old(-6,-4,5);   // negative xy
+        Coordinates_old cordNxz = new Coordinates_old(-4,3,-3);   // negative xz
+        Coordinates_old cordNyz = new Coordinates_old(3,-3,-2);   // negative yz
+        Coordinates_old cordNxyz = new Coordinates_old(-4,-4,-3); // negative xyz
 
         //values for test vectors
         //default 0,0,0
@@ -39,9 +39,9 @@ public class Vector_Tests {
 
 
         System.out.println("| Vector_Tests | Constructor | 1.TEST | Constructors");
-        Vector vDefault = new Vector();
-        Vector vCordVal = new Vector(cordNorm, 1, 1, 0);
-        Vector vInts = new Vector(4,3,2,1,1,0);
+        Vector_old vDefault = new Vector_old();
+        Vector_old vCordVal = new Vector_old(cordNorm, 1, 1, 0);
+        Vector_old vInts = new Vector_old(4,3,2,1,1,0);
 
 
         System.out.println("| Default |");
@@ -61,15 +61,15 @@ public class Vector_Tests {
         System.out.println();
         System.out.println("| Vector_Tests | Constructor | 3.TEST | CALC");
         System.out.println("| CalcAngles |");
-        Vector vNormC = new Vector(cordNorm, 5,6,7);
+        Vector_old vNormC = new Vector_old(cordNorm, 5,6,7);
         double[] angls = vNormC.calcAngles();
         System.out.println("| X/Y: " + angls[0] + " | X/Z: " + angls[1] + " |");
 
-        Vector vAngleX = new Vector(cordNorm, 1,0,0);
+        Vector_old vAngleX = new Vector_old(cordNorm, 1,0,0);
         angls = vAngleX.calcAngles();
         System.out.println("| X/Y: " + angls[0] + " | X/Z: " + angls[1] + " |");
 
-        Vector vAngleY = new Vector(cordNorm, 0,1,0);
+        Vector_old vAngleY = new Vector_old(cordNorm, 0,1,0);
         angls = vAngleY.calcAngles();
         System.out.println("| X/Y: " + angls[0] + " | X/Z: " + angls[1] + " |");
 
@@ -91,7 +91,7 @@ public class Vector_Tests {
 
         System.out.println();
         System.out.println("| CalcRates | try negativ numbers |");
-        Vector vNegX = new Vector(cordNorm,-4,5,1);
+        Vector_old vNegX = new Vector_old(cordNorm,-4,5,1);
         rates = vNegX.calcRates("x");
         System.out.println("| negative-X-focused | X: " + rates[0] + " | Y: " + rates[1] + " | Z: " + rates[2] + " |");
         rates = vNegX.calcRates("y");
@@ -105,9 +105,9 @@ public class Vector_Tests {
         CodeDraw cdNegX = new CodeDraw(700,500);
         CodeDraw cdNegY = new CodeDraw(700,500);
         //CodeDraw cdXZ = new CodeDraw(700,500);
-        Vector vNorm = new Vector(cordNorm, 5,6,7);
-        vNegX = new Vector(cordNorm,-4,5,1);
-        Vector vNegY = new Vector(cordNorm, 4, -5, 1);
+        Vector_old vNorm = new Vector_old(cordNorm, 5,6,7);
+        vNegX = new Vector_old(cordNorm,-4,5,1);
+        Vector_old vNegY = new Vector_old(cordNorm, 4, -5, 1);
         vNorm.visualize2D(cdNorm, "Y");
         vNegX.visualize2D(cdNegX, "Y");
         vNegY.visualize2D(cdNegY ,"Y");

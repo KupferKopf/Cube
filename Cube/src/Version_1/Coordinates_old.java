@@ -5,40 +5,39 @@ import java.util.NoSuchElementException;
 
 /**
  * The most basic underlying class for this project
- * having 3 Integer (in future maybe double for 0. cords) values representing the location
+ * having 3 doubles (in future maybe double for 0. cords) values representing the location
  * and a couple methods to get and change/Set those values
  */
-public class Coordinates {
+public class Coordinates_old {
 
 
-    private int x;
-    private int y;
-    private int z;
+    private double x;
+    private double y;
+    private double z;
 
 
     /**
      * the default constructor for cords if there is no need for special values just a quick new point in the world
      */
-    public Coordinates(){
+    public Coordinates_old(){
         x = 0;
         y = 0;
         z = 0;
     }
 
     /**
-     * the custom/normal constructor for cords, allowing any kind of cord, as long as its an int (maybe later it will be double)
-     * TODO make int to double
+     * the custom/normal constructor for cords, allowing any kind of cord, as long as its an double (maybe later it will be double)
      * @param x -> the x part of the coordinate
      * @param y -> the y part of the coordinate
      * @param z -> the z part of the coordinate
      */
-    public Coordinates(int x, int y, int z){
+    public Coordinates_old(double x, double y, double z){
         try{
-            setAll(new int[] {x,y,z});
+            setAll(new double[] {x,y,z});
         }catch(NullPointerException np){ // not needed to catch this but still gona do it just in case
-            System.out.println("| Coordinates | int-Constructor | NULL-ERROR | " + np.getMessage());
+            System.out.println("| Coordinates | double-Constructor | NULL-ERROR | " + np.getMessage());
         }catch(NoSuchElementException nse){ // not need to catch as well but still just to be safe
-            System.out.println("| Coordinates | int-Constructor | VALUE-ERROR | " + nse.getMessage());
+            System.out.println("| Coordinates | double-Constructor | VALUE-ERROR | " + nse.getMessage());
         }
 
     }
@@ -47,7 +46,7 @@ public class Coordinates {
      * also a custom constructor used if you want to make a carbon coby of a cord directly
      * @param cords -> the coordinates that you want to copy
      */
-    public Coordinates(Coordinates cords){
+    public Coordinates_old(Coordinates_old cords){
         try{
             setByCords(cords);
         }catch(NullPointerException np){ // possible
@@ -60,32 +59,32 @@ public class Coordinates {
      * Getters and setters for the cords
      * @return the individual cords for all the values
      */
-    public int getX() {
+    public double getX() {
         return x;
     }
 
-    public void setX(int x) {
+    public void setX(double x) {
         this.x = x;
     }
 
-    public int getY() {
+    public double getY() {
         return y;
     }
 
-    public void setY(int y) {
+    public void setY(double y) {
         this.y = y;
     }
 
-    public int getZ() {
+    public double getZ() {
         return z;
     }
 
-    public void setZ(int z) {
+    public void setZ(double z) {
         this.z = z;
     }
 
-    public int[] getAll(){
-       return new int[] {x,y,z};
+    public double[] getAll(){
+       return new double[] {x,y,z};
     }
     /*
      * end of generic setters and getters
@@ -94,14 +93,14 @@ public class Coordinates {
 
     /**
      * sets the 3 cords of the coordinate to the new values contained in vals
-     * @param vals -> int array that contains the new values for the coordinates
+     * @param vals -> double array that contains the new values for the coordinates
      * @throws NullPointerException -> if the array is null
      * @throws NoSuchElementException -> if the array is too short or too long
      */
-    public void setAll(int[] vals) throws NullPointerException, NoSuchElementException{
+    public void setAll(double[] vals) throws NullPointerException, NoSuchElementException{
         try{
             if(vals.length != 3){
-                throw new NoSuchElementException("The given array didn't contain 3 integers");
+                throw new NoSuchElementException("The given array didn't contain 3 doubles");
             }
             setX(vals[0]);
             setY(vals[1]);
@@ -110,7 +109,7 @@ public class Coordinates {
             System.out.println("| Coordinates | setAll | NULL-ERROR | The given array was null");
             throw new NullPointerException("The given array was null");
         }catch (NoSuchElementException nse){ // if the array doesn't contain enough or to many elements
-            System.out.println("| Coordinates | setAll | VALUE-ERROR | The given array didn't contain 3 integers ");
+            System.out.println("| Coordinates | setAll | VALUE-ERROR | The given array didn't contain 3 doubles ");
             throw new NoSuchElementException(nse.getMessage());
         }
     }
@@ -121,7 +120,7 @@ public class Coordinates {
      * @param cords -> the other coordinate used for the values
      * @throws NullPointerException -> if the cord's null
      */
-    public void setByCords(Coordinates cords) throws NullPointerException{
+    public void setByCords(Coordinates_old cords) throws NullPointerException{
         try{
             setX(cords.getX());
             setY(cords.getY());
@@ -133,7 +132,7 @@ public class Coordinates {
     }
 
 
-    public int calcAngels(Coordinates cord){
+    public double calcAngels(Coordinates_old cord){
 
 
         return 0;
@@ -141,7 +140,7 @@ public class Coordinates {
 
 
 
-    public int calcVektor(Coordinates cord){
+    public double calcVektor(Coordinates_old cord){
 
         return 0;
     }
@@ -156,8 +155,8 @@ public class Coordinates {
      */
     @Override
     public boolean equals(Object obj) {
-        if(obj.getClass().equals(Coordinates.class)){ // are they cords?
-            if(x == ((Coordinates) obj).x && y == ((Coordinates) obj).y && z == ((Coordinates) obj).z){ // do they have the same values?
+        if(obj.getClass().equals(Coordinates_old.class)){ // are they cords?
+            if(x == ((Coordinates_old) obj).x && y == ((Coordinates_old) obj).y && z == ((Coordinates_old) obj).z){ // do they have the same values?
                 return true;
             }
         }

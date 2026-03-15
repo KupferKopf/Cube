@@ -1,5 +1,7 @@
 package Tests;
 
+import codedraw.CodeDraw;
+
 public class Main_Test {
 
     private String testSequanz;
@@ -30,12 +32,19 @@ public class Main_Test {
             System.out.println("| Main_Test | runTests | INFO | We got " + next);
 
             /// Vector-tests
-            if(next == 'v'){
-                System.out.println("| Main_Test | runTests | INFO | Starting Vector-tests ");
-                Vector_Tests vTests = new Vector_Tests();
-            }else{
-                System.out.println("| Main_Test | runTests | VALUE-ERROR | We dont have this value on the list, cant test what we dont know");
+            switch (next){
+                case 'f':
+                    Fuckaround fucker = new Fuckaround();
+                    break;
+                case 'v':
+                    System.out.println("| Main_Test | runTests | INFO | Starting Vector-tests ");
+                    Vector_Tests vTests = new Vector_Tests();
+                    break;
+                default:
+                    System.out.println("| Main_Test | runTests | VALUE-ERROR | We dont have this value on the list, cant test what we dont know");
+                    break;
             }
+
 
             // TODO
             //  possible break point asking "wana continue or not"

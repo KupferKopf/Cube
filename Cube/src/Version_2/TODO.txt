@@ -1,0 +1,26 @@
+
+        DIVIDE AND CONQUER AT ALL TIMES
+
+
+Todo:
+     DONE implement the interface onto the cube
+     DONE List for all objects in the world
+     DONE outsource the projection and drawing method to the objects
+     DONE Add move methods to object for X/Y/Z axes
+     DONE Add move method(s) to object for moving by vector
+     DONE Add Vector class
+     ON HOLD make setters private if not needed publicly, reduce work later
+     DONE only draw the needed lines
+     add ifs for setters
+     finish ReadMe
+     Multi-object render (ignoring visibility & clipping, for now)
+     DONE Order of Methods in Object / Cube
+     Project-all Method for world, so that after changes to one object all the others get redone
+     Animations-Class allowing animtions or changes unversal for all objects
+     Give the Camera a Coordination
+     Add VOW
+     Add Rotation methods to all objects
+     what happens if the object is behind the camera -> dividing by 0
+     change the calculation to check if the object is in front of the camera
+
+     Current: FREE

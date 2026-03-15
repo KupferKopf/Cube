@@ -1,21 +1,22 @@
-package Version_1;
-
+package Version_2;
 
 import codedraw.CodeDraw;
+
+import java.lang.Object;
 
 /**
  * a class used in combination with @Class Coordinates to describe the different objects in the world
  * using 3 values, same as coordinates but those arnt the location, that's covered by a coordinate itself
  * those are the direction of the vektor in which and how strong it goes
  */
+
 public class Vector {
 
+    private Coordinate startPoint;
 
-    private Coordinates startPoint;
-
-    private int xDirection;
-    private int yDirection;
-    private int zDirection;
+    private double xDirection;
+    private double yDirection;
+    private double zDirection;
 
 
 
@@ -28,7 +29,7 @@ public class Vector {
      * so point at the center with no direction, great for custom use later
      */
     public Vector(){
-        startPoint = new Coordinates();
+        startPoint = new Coordinate();
 
         xDirection = 0;
         yDirection = 0;
@@ -43,12 +44,12 @@ public class Vector {
      * @param yDir -> the y-Direction for the Vector
      * @param zDir -> the z-Direction for the Vector
      */
-    public Vector(Coordinates cord, int xDir, int yDir, int zDir){
+    public Vector(Coordinate cord, double xDir, double yDir, double zDir){
 
         try{
             setStartPoint(cord);
         }catch (NullPointerException np){
-            setStartPoint(new Coordinates());
+            setStartPoint(new Coordinate());
         }
 
         xDirection = xDir;
@@ -67,9 +68,9 @@ public class Vector {
      * @param yDir -> y Direction
      * @param zDir -> z Direction
      */
-    public Vector(int xCord, int yCord, int zCord, int xDir, int yDir, int zDir){
+    public Vector(double xCord, double yCord, double zCord, double xDir, double yDir, double zDir){
 
-        setStartPoint(new Coordinates(xCord, yCord, zCord));
+        setStartPoint(new Coordinate(xCord, yCord, zCord));
 
         xDirection = xDir;
         yDirection = yDir;
@@ -83,7 +84,7 @@ public class Vector {
      * Getter for startPoint
      * @return the Startpoint a Coordinate
      */
-    public Coordinates getStartPoint() {
+    public Coordinate getStartPoint() {
         return startPoint;
     }
 
@@ -92,7 +93,7 @@ public class Vector {
      * @param startPoint -> the given startPoint used to overwrite the current value or assign for the first time
      * @throws NullPointerException -> if the given Coordinate is NULL a Null-pointer is thrown
      */
-    public void setStartPoint(Coordinates startPoint) throws NullPointerException {
+    public void setStartPoint(Coordinate startPoint) throws NullPointerException {
         try{
             this.startPoint = startPoint;
         }catch (NullPointerException np){
@@ -107,50 +108,56 @@ public class Vector {
      * the getters and setters for the Directions
      * @return the wanted direction factor of the Vactor, and all of them at once if needed
      */
-    public int getxDirection() {
+    public double getxDirection() {
         return xDirection;
     }
 
-    public void setxDirection(int xDirection) {
+    public void setxDirection(double xDirection) {
         this.xDirection = xDirection;
     }
 
-    public int getyDirection() {
+    public double getyDirection() {
         return yDirection;
     }
 
-    public void setyDirection(int yDirection) {
+    public void setyDirection(double yDirection) {
         this.yDirection = yDirection;
     }
 
-    public int getzDirection() {
+    public double getzDirection() {
         return zDirection;
     }
 
-    public void setzDirection(int zDirection) {
+    public void setzDirection(double zDirection) {
         this.zDirection = zDirection;
     }
 
-    public int[] getAllDirection(){
-        return new int[] {xDirection, yDirection, zDirection};
+    public double[] getAllDirection(){
+        return new double[] {xDirection, yDirection, zDirection};
     }
 
 
 
     /// ____________________________________ CALCS __________________________________________
 
-    //TODO descriptions needed
 
-    // einmal auf der x,y ebene
-    // und einaml auf der x,z ebene
-    // die rotation berechnen
+    /**
+     * Calculates both Angles between x and y as well as x and z
+     * @return a double array with [0] = x/y-Angle and [1] = x/z-Angle
+     */
     public double[] calcAngles(){
 
         System.out.println("| Vector | calcAngles | INFO | starting the method");
         return new double[] {calcAngle(xDirection, yDirection), calcAngle(xDirection, zDirection)};
     }
 
-    public double calcAngle(int x, int y){
+    /**
+     * Calculates the angle between two axes
+     * @param x -> a double representing the first axes
+     * @param y -> a double representing the second axes
+     * @return the double value representing the angle between the two axes
+     */
+    public double calcAngle(double x, double y){
 
         System.out.println("| Vector | calcAngle | INFO | starting the method");
 
@@ -190,10 +197,11 @@ public class Vector {
     }
 
 
-    // first calc all the possible connections between those test cords and calc the rates and find out how to put negativ numbers into this game without fucking up
-    // either taking the biggest value of the 3 and give the rate working with that
-    // or taking the wanted axes
-    // not sure what will work better or might be more usefull but im just gona make both cant hurt and worst-case one wont be used
+    /**
+     * Calculates the increase/decrease Rate of the desired Axes
+     * @param axes -> the 1-letter String (not Cases-sensitive) that decides the axes
+     * @return the Rate at which the vector changes on the given axes
+     */
     public double[] calcRates(String axes){
 
         String comp = axes.toLowerCase();
@@ -289,7 +297,8 @@ public class Vector {
 
 
     /// _________________________________________VISUAL_____________________________________________
-
+    ///  no longer used but kept for the math that was used
+/*
     //TODO descriptions needed
 
     public void visualize2D(CodeDraw cd, String axes){
@@ -418,6 +427,7 @@ public class Vector {
         // TODO write drawVector but think about if the vector is visible
     }
 
+ */
 
     ///_______________________________________________STATS__________________________________
 
@@ -432,9 +442,9 @@ public class Vector {
 
         if(obj.getClass().equals(Vector.class)){
             if(((Vector) obj).startPoint.equals(startPoint) &&
-                ((Vector) obj).xDirection == xDirection &&
-                ((Vector) obj).yDirection == yDirection &&
-                ((Vector) obj).zDirection == zDirection){
+                    ((Vector) obj).xDirection == xDirection &&
+                    ((Vector) obj).yDirection == yDirection &&
+                    ((Vector) obj).zDirection == zDirection){
                 return true;
             }
         }
@@ -448,7 +458,7 @@ public class Vector {
      */
     @Override
     public int hashCode(){
-        return startPoint.hashCode() + xDirection + yDirection + zDirection;
+        return (int) (startPoint.hashCode() + xDirection + yDirection + zDirection);
     }
 
 
@@ -456,7 +466,7 @@ public class Vector {
      * The toString of a Vector returning all the details in a nice single string/ one line
      * @return the toString from the start-Coordinate as well as the directional vector with its values
      */
-   @Override
+    @Override
     public String toString(){
         return startPoint.toString() + " --> | " + xDirection + " | " + yDirection + " | " + zDirection + " |";
     }
@@ -476,3 +486,4 @@ public class Vector {
     }
 
 }
+
