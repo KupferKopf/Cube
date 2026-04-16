@@ -89,18 +89,18 @@ public interface Object {
 
 
     /**
-     * @return all projectedCords, a copy of the entire array
-     */
-    Coordinate[] getProjectedCords();
-
-
-    /**
      * change the projected cords at the wished position
      * @param pos -> position that will be changed
      * @param x -> the x-value for the cord
      * @param y -> the y-value for the cord
      */
-    private void setProjectedCords(int pos, double x, double y){};
+    private void setProjectedCord(int pos, double x, double y){};
+
+
+    /**
+     * @return all projectedCords, a copy of the entire array
+     */
+    Coordinate[] getProjectedCords();
 
 
     /**
@@ -121,9 +121,6 @@ public interface Object {
      * @param cd -> the Codedraw window in which it will be drawn
      */
     void project(CodeDraw cd);
-
-
-
 
 
     /**

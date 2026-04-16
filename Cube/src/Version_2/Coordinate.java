@@ -6,7 +6,7 @@ import java.util.NoSuchElementException;
 
 /**
  * The most basic underlying class for this project
- * having 3 doubles (in future maybe double for 0. rawCords) values representing the location
+ * having 3 doubles values representing the location
  * and a couple methods to get and change/Set those values
  */
 public class Coordinate {
@@ -44,15 +44,10 @@ public class Coordinate {
     }
 
     /**
-     * also a custom constructor used if you want to make a carbon coby of a cord directly
-     * @param cords -> the coordinates that you want to copy
+     * a copy methode that gives you a new copy instance of @this
      */
-    public Coordinate(Coordinate cords){
-        try{
-            setByCords(cords);
-        }catch(NullPointerException np){ // possible
-            System.out.println("| Coordinates | rawCords-Constructor | NULL-ERROR | " + np.getMessage());
-        }
+    public Coordinate copy(){
+        return new Coordinate(this.x, this.y, this.z);
     }
 
 
@@ -149,7 +144,7 @@ public class Coordinate {
 
 
 
-    public double calcVektor(Coordinate cord){
+    public double calcVector(Coordinate cord){
 
         return 0;
     }

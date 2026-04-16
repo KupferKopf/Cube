@@ -111,7 +111,7 @@ public class Fuckaround {
 
             while (objList.hasNext()){
                 Object cube = objList.next();
-                cube.moveZ(0.25);
+                cube.moveX(0.25);
                 cube.project(cd);
                 System.out.println(cube.getRawCord(0).getZ());
 

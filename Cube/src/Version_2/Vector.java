@@ -214,7 +214,7 @@ public class Vector {
         };
     }
 
-    public double[] calcXRate(){
+    private double[] calcXRate(){
 
         System.out.println("| Vector | calcXRate | INFO | Starting Methode");
 
@@ -240,7 +240,7 @@ public class Vector {
         return new double[] {0, 0, 0};
     }
 
-    public double[] calcYRate(){
+    private double[] calcYRate(){
 
         System.out.println("| Vector | calcYRate | INFO | Starting Methode");
 
@@ -267,7 +267,7 @@ public class Vector {
         return new double[] {0, 0, 0};
     }
 
-    public double[] calcZRate(){
+    private double[] calcZRate(){
 
         System.out.println("| Vector | calcZRate | INFO | Starting Methode");
 

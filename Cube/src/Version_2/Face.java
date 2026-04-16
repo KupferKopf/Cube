@@ -2,8 +2,6 @@ package Version_2;
 
 public class Face {
 
-    //Coordinate[] cords;
-
     // the points in the cords array of the object, so it doesn't need the exact cords directly
     int[] points;
 
@@ -20,28 +18,28 @@ public class Face {
         //this.cords = cords;
     }
 
-    public void addCord(int point){
+    public boolean addPoint(int point){
         if(point == -1){
             System.out.println("| Face | addCord | NULL-ERROR | the given point is -1 -> can't be added to face |");
-            return;
+            return false;
         }
 
         for (int i = 0; i < points.length; i++) {
             if(points[i] == -1){     // -1 used for empty points array
                 points[i] = point;
-                return;
+                return true;
             }
         }
-
+        return false;
     }
 
     // maybe
-    public boolean removeCord(int pos){
+    public boolean removePoint(int pos){
         return false;
     }
 
 
-    public boolean replaceCord(int removePoint, int replacePoint){
+    public boolean replacePoint(int removePoint, int replacePoint){
 
         for (int i = 0; i < points.length; i++) {
             if(points[i] == removePoint){
